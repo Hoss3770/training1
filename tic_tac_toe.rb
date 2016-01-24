@@ -6,6 +6,7 @@ class Game
     @y = []
     @last_played = nil
   end
+
   def game
     @game
   end
@@ -15,6 +16,7 @@ class Game
     #{game[4]}|#{game[5]}|#{game[6]}
     _______
     #{game[7]}|#{game[8]}|#{game[9]}
+
          )
   end
   def x_play(num)
@@ -25,7 +27,7 @@ class Game
   end
   def finshed?
      if @game.values.all?{|val| val == nil}
-       self.instance_variables.each{|var| var = []* **  * ** * 8 }
+       self.instance_variables.each{|var| var = [] }
      end
   end
   def winner?
@@ -54,18 +56,10 @@ private
        end
       print_game
       end
-      if winner?
-        puts "#{winner?} won"
-        @game.clear
-        @x.clear
-        @y.clear
-        @last_played = nil
-      end
-    else
-      puts "Sorry number not within range 1 to 9"
-    end
-  end
 
+  end
 end
+
+  end
 
 
