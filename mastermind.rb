@@ -57,24 +57,20 @@ class Game
      @tips << result if add_tip
      result
     end
-  def all_possb
-    all = []
-    #create nested loops depdnding on the length to get all possbilties
-    nested_loops = %Q{for i0 in @allowed_colors.keys
-                        place
-                      end}
-    (@length - 1 ).times do|n|
-      nested_loops.gsub!('place', %Q(for i#{ n+1 } in @allowed_colors.keys
-                        place
-                      end))
-
+  def all_possb()
+    arr = []
+    colors = @allowed_colors.keys
+    for i in 0...(colors.length** @length)
+      st = i.to_s(colors.length)
+      if st.length < @length
+        until st.length == @length
+          st.insert(0, '0')
+        end
+      end
+      colors.each_with_index { |el,ind | st.gsub!("#{ind}",el) }
+      arr << st
     end
-    code = ''
-    @length.times{|n|code<<"\#{i#{n}}"}
-    nested_loops.gsub!('place',%Q(code =  "#{code}"
-                        all << code))
-    eval(nested_loops)
-   return all
+    arr
   end
 
   def win?()
